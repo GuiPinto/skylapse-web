@@ -5,6 +5,4 @@ define(function (require) {
     var $ = require('jquery'),
         templates = require('templates');
 
-    $('body').append(templates.sample({ content: 'Sample Handlebars Template' }));
-
 });

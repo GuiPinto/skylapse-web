@@ -1,5 +1,6 @@
 node_modules/
-static/bower_components/
+bower_components/
+.grunt/
 
 static/css/styles.css
 static/templates/compiled.js

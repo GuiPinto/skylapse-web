@@ -1,54 +1,23 @@
 $(function() {
 
-	var blocks = [
-		{
-			id: 'v5',
+	var blocks = [];
+	var prevSlot = 0;
+	for (var id in window.videos) {
+		var video = window.videos[id];
+		blocks.push({
+			id: 'v' + id,
 			type: 'video',
 			src: [
-				'http://guipinto.com/skylapse/workspace/000000005df338d8_2015-02-04_19.mp4',
-				'http://guipinto.com/skylapse/workspace/000000005df338d8_2015-02-04_19.ogg'
+				'https://skylapse.s3.amazonaws.com/videos/'+video.uid+'/'+video.id+'.mp4',
+				'https://skylapse.s3.amazonaws.com/videos/'+video.uid+'/'+video.id+'.mp4'
 			],
-			slot: [0, 38]
-		},
-		{
-			id: 'v6',
-			type: 'video',
-			src: [
-				'http://guipinto.com/skylapse/workspace/000000005df338d8_2015-02-04_20.mp4',
-				'http://guipinto.com/skylapse/workspace/000000005df338d8_2015-02-04_20.ogg'
-			],
-			slot: [39, 76]
-		},
-		{
-			id: 'v7',
-			type: 'video',
-			src: [
-				'http://guipinto.com/skylapse/workspace/000000005df338d8_2015-02-04_21.mp4',
-				'http://guipinto.com/skylapse/workspace/000000005df338d8_2015-02-04_21.ogg'
-			],
-			slot: [77, 114]
-		},
-		{
-			id: 'v8',
-			type: 'video',
-			src: [
-				'http://guipinto.com/skylapse/workspace/000000005df338d8_2015-02-04_22.mp4',
-				'http://guipinto.com/skylapse/workspace/000000005df338d8_2015-02-04_22.ogg'
-			],
-			slot: [115, 152]
-		},
-		{
-			id: 'v9',
-			type: 'video',
-			src: [
-				'http://guipinto.com/skylapse/workspace/000000005df338d8_2015-02-04_23.mp4',
-				'http://guipinto.com/skylapse/workspace/000000005df338d8_2015-02-04_23.ogg'
-			],
-			slot: [152, 189]
-		}
-	]
+			slot: [prevSlot, prevSlot + 30]
+		});
+		prevSlot += 30;
+	}
+	console.log(blocks);
 
-	var duration = 185;
+	var duration = prevSlot + 30;
 	var position = parseInt(duration / 4);
 	var activeBlock = null; // init null
 	var activeBlockIndex = null;
@@ -146,7 +115,10 @@ $(function() {
 		var player = $(".wrap #" + block.id)[0];
 		
 		player.addEventListener("playing", function () {
-			if (activeBlock.id != block.id) return;
+			if (activeBlock.id != block.id) { 
+				console.log('canceling video event because im not active block! i am ', block.id);
+				return;
+			}
 			
 			console.log('--playing--currentTime:', $(this)[0].currentTime);
 			buffering = false;
@@ -159,13 +131,19 @@ $(function() {
 		}, false);
 		
 		player.addEventListener("waiting", function () {
-			if (activeBlock.id != block.id) return;
+			if (activeBlock.id != block.id) { 
+				console.log('canceling video event because im not active block! i am ', block.id);
+				return;
+			}
 			console.log('--waiting--currentTime:', $(this)[0].currentTime);
 			buffering = true;
 		}, false);
 		
 		player.addEventListener("loadedmetadata", function () {
-			if (activeBlock.id != block.id) return;
+			if (activeBlock.id != block.id) { 
+				console.log('canceling video event because im not active block! i am ', block.id);
+				return;
+			}
 			console.log('--loadedmetadata--', $(this)[0].currentTime);
 			player.currentTime = startAtPosition;
 		}, false);
@@ -216,6 +194,13 @@ $(function() {
 	}
 	
 	
+	$(".stacked-mode").click(function(){
+ 		if ($(this).is(':checked')) {
+			$(".wrap").addClass("stacked");
+		} else {
+			$(".wrap").removeClass("stacked");
+		}
+	});
 	
 			
 	progressEl.noUiSlider({
@@ -243,10 +228,5 @@ $(function() {
 	});
 
 	
-	
-	
-	
-
-
 	
 });

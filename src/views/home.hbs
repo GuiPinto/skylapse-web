@@ -1,0 +1,15 @@
+
+<div class="home-container">
+
+{{#each videos}}
+	<div class="home-video">
+		<a href="/player/{{_id}}">
+			<div class="title">{{_id}} ({{count}})</div>
+			<video class="video" id="v{{@index}}" preload="auto">
+				<source src="https://skylapse.s3.amazonaws.com/videos/{{uid}}/{{id}}.mp4" type="video/mp4">
+				<source src="https://skylapse.s3.amazonaws.com/videos/{{uid}}/{{id}}.ogg" type="video/ogg">
+			</video>
+		</a>
+	</div>
+{{/each}}
+</div>

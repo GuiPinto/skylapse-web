@@ -1,10 +1,10 @@
-var indexView = require('../views/index');
+var homeController = require('../controllers/home');
 var playerController = require('../controllers/player');
 
 module.exports = function (router) {
 
-    router.get('/', indexView);
+    router.get('/', homeController.index);
 
-    router.get('/player', playerController.index);
+    router.get('/player/:uid', playerController.index);
 
 };
