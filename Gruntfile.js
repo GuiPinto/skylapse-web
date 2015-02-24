@@ -5,7 +5,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-handlebars');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
-    grunt.loadNpmTasks('grunt-jslint');
     grunt.loadNpmTasks('grunt-notify');
     grunt.loadNpmTasks('grunt-sass');
 
@@ -67,7 +66,7 @@ module.exports = function (grunt) {
 
     });
 
-    grunt.registerTask('default', [ 'handlebars', 'jslint', 'sass' ]);
+    grunt.registerTask('default', [ 'handlebars', 'sass' ]);
     grunt.registerTask('test', [ 'jasmine' ]);
 
 };
