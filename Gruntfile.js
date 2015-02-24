@@ -39,23 +39,6 @@ module.exports = function (grunt) {
             }
         },
 
-        jslint: {
-
-            client: {
-                src: ['static/js/**/*.js'],
-                directives: {
-                    browser: true,
-                    nomen: true,
-                    globals: {
-                        'define': true,
-                        'module': true,
-                        'require': true
-                    }
-                }
-            }
-
-        },
-
         sass: {
 
             dist: {
