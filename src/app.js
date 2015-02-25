@@ -19,9 +19,8 @@ var connect = function () {
 		server: { socketOptions: { keepAlive: 1 } },
 		database : 'skylapse-cloud'
 	};
-	
-	mongoose.connect(process.env.MONGO || 'mongodb://heroku_app33751165:j7p7j8lgjgbsao41681l6bfaeb@ds041841.mongolab.com:41841/heroku_app33751165', options);
-	//mongoose.connect(process.env.MONGO || 'mongodb://localhost/skylapse-cloud', options);
+
+	mongoose.connect(process.env.MONGO || 'mongodb://localhost/skylapse-cloud', options);
 };
 connect();
 mongoose.connection.on('error', console.log);
