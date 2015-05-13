@@ -45,7 +45,8 @@ module.exports.compilation = function (req, res) {
 	var uid = req.params.uid;
 
 	Video.find({ 
-		uid: uid
+		uid: uid,
+		status: 'ready'
 	}).sort({
 		date: -1, 
 		hour: -1
