@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
 	session = require('express-session'),
 	bodyParser = require('body-parser'),
 	enrouten = require('express-enrouten'),
+	morgan = require('morgan'),
 	hbs = require('express-hbs'),
 	hbs_helpers = require('../static/templates/helpers.js')(hbs);
 
@@ -32,6 +33,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
+app.use(morgan('combined'));
 app.engine('hbs', hbs.express3({ layoutsDir: 'src/views/layouts' }));
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');

@@ -58,6 +58,11 @@ body {
 .wrap .video:nth-child(5) { border-color: blue; }
 .wrap .video:nth-child(6) { border-color: lime; }
 
+.list .video {
+    display: block;
+    margin: 10px;
+}
+
 #progress {
     display: inline-block;
     width: 80%;
